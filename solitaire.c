@@ -13,17 +13,18 @@ typedef struct deck{
 }Deck;
 
 // Defining structure of play table
-typedef struct table{
-    Deck shuffleDeck[2];
-    Deck playDeck[7];
-    Deck acesDeck[4];
-}Table;
+typedef struct klondike{
+    Deck tableau[7];    // Main playing area consisting of cards dealt in 7 columns at the start of the game
+    Deck stock;         // After dealing cards onto tableau, remaining cards left in stack make up stockpile
+    Deck talon;         // Cards from stockpile are drawn and placed into talon/waste pile to be used
+    Deck foundation[4]; // Win the game by filling up foundation piles wich corresponds to one of 4 suits
+}Klondike;
 
 // Initialization functions
-void initTable(Table *table);
+void initKlon(Klondike *table);
 void initDeck(Deck *deck, int size);
 void shuffle(Deck *deck);
-void distribute(Table *table);
+void distribute(Klondike *table);
 
 // Operating functions
 void push(Card card, Deck *deck);
@@ -35,7 +36,7 @@ int main(){
 }
 
 // Initializes play table
-void initTable(Table *table){
+void initKlon(Klondike *table){
 
 }
 
@@ -50,7 +51,7 @@ void shuffle(Deck *deck){
 }
 
 // distrubutes cards from shuffle deck to main play decks
-void distribute(Table *table){
+void distribute(Klondike *table){
 
 }
 
