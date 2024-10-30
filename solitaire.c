@@ -29,20 +29,28 @@ typedef struct klondike{
 
 // Initialization functions
 void initKlon(Klondike *klon);
-void initDeck(Deck *deck);
+void initDeck(Deck *deck, int size);
 void shuffle(Deck *deck);
 
 // Operating functions
 void push(Card card, Deck *deck);
 Card pop(Deck *deck);
 
+// Game functions
+void displayKlon(Klondike *klon);
+
 int main(){
 
     return 0;
 }
 
-// Sets up the game
-void setup(Klondike *klon){
+// Sets up the solitaire game
+void initKlon(Klondike *klon){
+
+}
+
+// Initializes deck before use
+void initDeck(Deck *deck, int size){
 
 }
 
@@ -58,5 +66,10 @@ void push(Card card, Deck *deck){
 
 // Removes card from top of stack and returns
 Card pop(Deck *deck){
+
+}
+
+// Displays cards to terminal
+void displayKlon(Klondike *klon){
 
 }
