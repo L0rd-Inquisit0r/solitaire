@@ -1,4 +1,11 @@
 #include<stdio.h>
+#include<stdio.h>
+
+#define TABLEAU_SIZE 7
+#define FOUNDATION_SIZE 4
+#define MAX_DECK_SIZE 52
+#define SUIT_SIZE 13
+#define MAX_POSSIBLE_TABLEAU_DECK_SIZE 21
 
 // Defining structure of a card
 typedef struct card{
@@ -8,23 +15,22 @@ typedef struct card{
 
 // Using array stack implementation to define a deck of cards
 typedef struct deck{
-    Card *cards;    // Dynamic array of Card datatype
-    int size;       // Holds total number of cards in deck
+    Card *cards;    // Dynamic array of Card datatype 
+    int top;        // Holds index of topmost card
 }Deck;
 
 // Defining structure of play table
 typedef struct klondike{
-    Deck tableau[7];    // Main playing area consisting of cards dealt in 7 columns at the start of the game
-    Deck stock;         // After dealing cards onto tableau, remaining cards left in stack make up stockpile
-    Deck talon;         // Cards from stockpile are drawn and placed into talon/waste pile to be used
-    Deck foundation[4]; // Win the game by filling up foundation piles wich corresponds to one of 4 suits
+    Deck tableau[TABLEAU_SIZE];         // Main playing area consisting of cards dealt in 7 columns at the start of the game
+    Deck stock;                         // After dealing cards onto tableau, remaining cards left in stack make up stockpile
+    Deck talon;                         // Cards from stockpile are drawn and placed into talon/waste pile to be used
+    Deck foundation[FOUNDATION_SIZE];   // Win the game by filling up foundation piles wich corresponds to one of 4 suits
 }Klondike;
 
 // Initialization functions
-void initKlon(Klondike *table);
-void initDeck(Deck *deck, int size);
+void initKlon(Klondike *klon);
+void initDeck(Deck *deck);
 void shuffle(Deck *deck);
-void distribute(Klondike *table);
 
 // Operating functions
 void push(Card card, Deck *deck);
@@ -35,32 +41,22 @@ int main(){
     return 0;
 }
 
-// Initializes play table
-void initKlon(Klondike *table){
+// Sets up the game
+void setup(Klondike *klon){
 
 }
 
-// Initializes each deck of the table
-void initDeck(Deck *deck, int size){
-
-}
-
-// shuffles the cards in the shuffle deck after initialization and distribution
+// Shuffles the cards in a deck
 void shuffle(Deck *deck){
 
 }
 
-// distrubutes cards from shuffle deck to main play decks
-void distribute(Klondike *table){
-
-}
-
-// pushes card to a deck
+// Pushes card to top of a deck
 void push(Card card, Deck *deck){
 
 }
 
-// removes top card from a deck
+// Removes card from top of stack and returns
 Card pop(Deck *deck){
 
 }
