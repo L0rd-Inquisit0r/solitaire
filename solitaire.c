@@ -1,5 +1,5 @@
 #include<stdio.h>
-#include<stdio.h>
+#include<stdlib.h>
 
 #define TABLEAU_SIZE 7
 #define FOUNDATION_SIZE 4
