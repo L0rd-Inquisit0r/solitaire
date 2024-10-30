@@ -2,14 +2,14 @@
 
 // Defining structure of a card
 typedef struct card{
-    int val;
-    int suit;
+    int val;    // Card values range from 1-13 (1 - Ace, 11 - Jack, 12 - Queen, 13 - King)
+    int suit;   // Suit values from 1-4 (1 - spades, 2 - hearts, 3 - clubs, 4 - diamonds)
 }Card;
 
 // Using array stack implementation to define a deck of cards
 typedef struct deck{
-    Card *cards;
-    int size;
+    Card *cards;    // Dynamic array of Card datatype
+    int size;       // Holds total number of cards in deck
 }Deck;
 
 // Defining structure of play table
