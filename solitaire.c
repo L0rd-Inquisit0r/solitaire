@@ -64,6 +64,7 @@ void initKlon(Klondike *klon){
 void initDeck(Deck *deck, int size){
     deck->cards = (Card*) malloc(sizeof(Card) * size);  // allocates array depending on size in heap
     deck->top = -1;                                     // initializes top index as -1
+    deck->size = size;                                  // holds the maximum size of the deck
 }
 
 // Shuffles the cards in a deck
