@@ -7,6 +7,7 @@
 #define SUIT_SIZE 13                // Number of cards per suit
 #define STOCK_SIZE 24               // Number of cards in stock/talon
 #define MAX_TABLEAU_COLUMN_SIZE 21  // Possible max number of cards in a tableau column 
+#define EMPTY -1                    // Value of empty deck
 
 // Enum for card values
 typedef enum{
@@ -97,7 +98,7 @@ void initKlon(Klondike *klon){
 // Initializes deck before use
 void initDeck(Deck *deck, int size){
     deck->cards = (Card*) malloc(sizeof(Card) * size);  // allocates array depending on size in heap
-    deck->top = -1;                                     // initializes top index as -1
+    deck->top = EMPTY;                                  // initializes top index as -1
     deck->size = size;                                  // holds the maximum size of the deck
 }
 
@@ -113,7 +114,13 @@ void push(Card card, Deck *deck){
 
 // Removes card from top of stack and returns
 Card pop(Deck *deck){
+    Card card;                              // Declaration of card template
 
+    if(deck->top != EMPTY){                 // Condition to check if deck is not empty 
+        card = deck->cards[deck->top--];    // Top card is assigned to card template
+    }
+
+    return card;                            // returns card value to calling funtion
 }
 
 // Displays cards to terminal
