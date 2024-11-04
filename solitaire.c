@@ -109,7 +109,10 @@ void shuffle(Deck *deck){
 
 // Pushes card to top of a deck
 void push(Card card, Deck *deck){
-
+    if(deck->top + 1 < deck->size){     // Condition to check if deck is full
+        deck->top++;                    // Increment top index
+        deck->cards[deck->top] = card;  // Card is at top of deck 
+    }
 }
 
 // Removes card from top of stack and returns
