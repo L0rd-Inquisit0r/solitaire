@@ -1,30 +1,41 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-#define TABLEAU_SIZE 7
-#define FOUNDATION_SIZE 4
-#define MAX_DECK_SIZE 52
-#define SUIT_SIZE 13
-#define MAX_POSSIBLE_TABLEAU_DECK_SIZE 21
+#define TABLEAU_SIZE 7              // Number of columns in tableau 
+#define FOUNDATION_SIZE 4           // 1 deck for each suit
+#define MAX_DECK_SIZE 52            // Total number of cards
+#define SUIT_SIZE 13                // Number of cards per suit
+#define MAX_TABLEAU_COLUMN_SIZE 21  // Possible max number of cards in a tableau column 
 
-// Defining structure of a card
-typedef struct card{
-    int val;    // Card values range from 1-13 (1 - Ace, 11 - Jack, 12 - Queen, 13 - King)
-    int suit;   // Suit values from 1-4 (1 - spades, 2 - hearts, 3 - clubs, 4 - diamonds)
+// Enum for card values
+typedef enum{
+    A = 1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING
+}CardValue;
+
+// Enum for card suits
+typedef enum{
+    SPADES = 0, HEARTS, CLUBS, DIAMONDS
+}CardSuit;
+
+// Card data structure
+typedef struct{
+    CardValue value;
+    CardSuit suit;
 }Card;
 
-// Using array stack implementation to define a deck of cards
-typedef struct deck{
+// Deck struct with a dynamic size using array stack implementation
+typedef struct{
     Card *cards;    // Dynamic array of Card datatype 
     int top;        // Holds index of topmost card
+    int size;       // Max capacity for the deck
 }Deck;
 
-// Defining structure of play table
-typedef struct klondike{
-    Deck tableau[TABLEAU_SIZE];         // Main playing area consisting of cards dealt in 7 columns at the start of the game
-    Deck stock;                         // After dealing cards onto tableau, remaining cards left in stack make up stockpile
-    Deck talon;                         // Cards from stockpile are drawn and placed into talon/waste pile to be used
-    Deck foundation[FOUNDATION_SIZE];   // Win the game by filling up foundation piles wich corresponds to one of 4 suits
+// Defining Klondike game structure
+typedef struct{
+    Deck tableau[TABLEAU_SIZE];         // Columns where cards are dealt at the start
+    Deck stock;                         // Remaining cards after dealing into tableau
+    Deck talon;                         // Cards drawn from stockpile, placed into talon (waste pile)
+    Deck foundation[FOUNDATION_SIZE];   // Foundation piles for each suit
 }Klondike;
 
 // Initialization functions
