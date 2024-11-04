@@ -5,11 +5,12 @@
 #define FOUNDATION_SIZE 4           // 1 deck for each suit
 #define MAX_DECK_SIZE 52            // Total number of cards
 #define SUIT_SIZE 13                // Number of cards per suit
+#define STOCK_SIZE 24               // Number of cards in stock/talon
 #define MAX_TABLEAU_COLUMN_SIZE 21  // Possible max number of cards in a tableau column 
 
 // Enum for card values
 typedef enum{
-    A = 1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING
+    ACE = 1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING
 }CardValue;
 
 // Enum for card suits
@@ -57,7 +58,40 @@ int main(){
 
 // Sets up the solitaire game
 void initKlon(Klondike *klon){
+    Deck deck;
+    initDeck(&deck, MAX_DECK_SIZE);                     // Initializes shuffle deck
+    Card card;                                          // Declares card template
 
+    for(int suit = 0; suit < 4; suit++){
+        for(int val = 1; val <= 13; val++){
+            card.suit = suit;
+            card.value = val;
+            push(card, &deck);                          // Pushes card into shuffle deck
+        }
+    }
+
+    shuffle(&deck);                                     // Shuffles shuffle deck
+
+    for(int n = 0; n < TABLEAU_SIZE; n++){
+        initDeck(&klon->tableau[n], MAX_TABLEAU_COLUMN_SIZE);   // Initializes each column in tableau
+    }
+
+    for(int n = 0; n < FOUNDATION_SIZE; n++){
+        initDeck(&klon->foundation[n], SUIT_SIZE);      // Initializes each foundation deck
+    }
+
+    initDeck(&klon->stock, STOCK_SIZE);                 // Initializes stock deck
+    initDeck(&klon->talon, STOCK_SIZE);                 // Initializes talon deck
+
+    for(int n = 0; n < TABLEAU_SIZE; n++){
+        for(int i = n; i < TABLEAU_SIZE; i++){
+            push(pop(&deck), &klon->tableau[i]);        // Pops card from shuffle deck and pushes into tableau column
+        }
+    }
+
+    for(int n = 0; n < STOCK_SIZE; n++){
+        push(pop(&deck), &klon->stock);                 // Remaining cards from shuffle deck is pushed into stock
+    }
 }
 
 // Initializes deck before use
